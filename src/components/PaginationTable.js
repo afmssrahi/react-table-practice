@@ -45,6 +45,28 @@ const PaginationTable = () => {
 		e.target.className = 'active';
 	};
 
+	const handlePreviousPage = (e) => {
+		previousPage();
+		Array.from(e.target.parentElement.children[1].children).forEach(
+			(ele) => {
+				ele.className = '';
+			}
+		);
+		e.target.parentElement.children[1].children[pageIndex - 1].className =
+			'active';
+	};
+
+	const handleNextPage = (e) => {
+		nextPage();
+		Array.from(e.target.parentElement.children[1].children).forEach(
+			(ele) => {
+				ele.className = '';
+			}
+		);
+		e.target.parentElement.children[1].children[pageIndex + 1].className =
+			'active';
+	};
+
 	return (
 		<div className='table-container'>
 			<h2>Pagination Table</h2>
@@ -122,7 +144,7 @@ const PaginationTable = () => {
 				<div className='table-pagination-buttons'>
 					<button
 						className='prev'
-						onClick={previousPage}
+						onClick={(e) => handlePreviousPage(e)}
 						disabled={!canPreviousPage}
 					>
 						Previous
@@ -139,7 +161,7 @@ const PaginationTable = () => {
 					</div>
 					<button
 						className='next'
-						onClick={nextPage}
+						onClick={(e) => handleNextPage(e)}
 						disabled={!canNextPage}
 					>
 						Next

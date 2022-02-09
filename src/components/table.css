@@ -75,7 +75,8 @@ button.prev, button.next {
 
 .table-pagination-buttons {
   display: flex;
-  align-items:center;
+  align-items: flex-start;
+  width: 81%;
 }
 
 button.prev:hover, button.next:hover {
