@@ -1,13 +1,22 @@
-import React, { useMemo } from 'react';
+import axios from 'axios';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useGlobalFilter, usePagination, useTable } from 'react-table';
 import { COLUMNS } from './columns';
 import GlobalFilterInput from './GlobalFilterInput';
-import MOCK_DATA from './MOCK_DATA.json';
 import './table.css';
 
 const PaginationTable = () => {
 	const columns = useMemo(() => COLUMNS, []);
-	const data = useMemo(() => MOCK_DATA, []);
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get('/api')
+			.then((res) => setData(res.data))
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
 	const tableInstance = useTable(
 		{
